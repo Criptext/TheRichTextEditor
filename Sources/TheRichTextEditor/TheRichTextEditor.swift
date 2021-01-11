@@ -62,7 +62,7 @@ public class TheRichTextEditor: UIView, WKScriptMessageHandler, WKNavigationDele
     public var preview: String = ""
     public var body: String = ""
 
-    var webView: WKWebView!
+    public var webView: WKWebView!
 
     public override init(frame: CGRect = .zero) {
         super.init(frame: frame)
@@ -74,7 +74,7 @@ public class TheRichTextEditor: UIView, WKScriptMessageHandler, WKNavigationDele
         setup()
     }
     
-    var enableAccessoryView: Bool {
+    public var enableAccessoryView: Bool {
         set {
             (webView as? CustomWebview)?.enableAccessoryView = newValue
         }
