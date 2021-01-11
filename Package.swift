@@ -24,7 +24,8 @@ let package = Package(
         .target(
             name: "TheRichTextEditor",
             dependencies: [],
-            resources: [.process("main.js"), .process("main.html")]),
+            path: nil,
+            resources: [.copy("Resources/main.js"), .copy("Resources/main.html")]),
         .testTarget(
             name: "TheRichTextEditorTests",
             dependencies: ["TheRichTextEditor"]),

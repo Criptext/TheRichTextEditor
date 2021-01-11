@@ -10,7 +10,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="jVD-uD-E95" customClass="AccessoryUICollectionViewCell" customModule="ShareExtension" customModuleProvider="target">
+        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="jVD-uD-E95" customClass="AccessoryUICollectionViewCell" customModule="TheRichTextEditor">
             <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="aa0-hX-eT4">
@@ -30,7 +30,7 @@
                 </constraints>
             </collectionViewCellContentView>
             <connections>
-                <outlet property="iconImageView" destination="62T-xA-NgZ" id="piK-hT-QZa"/>
+                <outlet property="iconImageView" destination="62T-xA-NgZ" id="BiN-ge-7Gb"/>
             </connections>
             <point key="canvasLocation" x="-239" y="55"/>
         </collectionViewCell>

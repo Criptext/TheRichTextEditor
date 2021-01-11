@@ -65,29 +65,31 @@ class CustomWebview: WKWebView {
         var image: UIImage {
             switch(self) {
             case .bold:
-                return UIImage(named: "bold")!
+                return UIImage(named: "bold", in: .module, compatibleWith: nil)!
             case .italic:
-                return UIImage(named: "italic")!
+                return UIImage(named: "italic", in: .module, compatibleWith: nil)!
             case .textAlignLeft:
-                return UIImage(named: "alignLeft")!
+                return UIImage(named: "alignLeft", in: .module, compatibleWith: nil)!
             case .textAlignCenter:
-                return UIImage(named: "alignCenter")!
+                return UIImage(named: "alignCenter", in: .module, compatibleWith: nil)!
             case .textAlignRight:
-                return UIImage(named: "alignRight")!
+                return UIImage(named: "alignRight", in: .module, compatibleWith: nil)!
             case .indent:
-                return UIImage(named: "indent")!
+                return UIImage(named: "indent", in: .module, compatibleWith: nil)!
             case .outdent:
-                return UIImage(named: "outdent")!
+                return UIImage(named: "outdent", in: .module, compatibleWith: nil)!
             case .clear:
-                return UIImage(named: "clear")!
+                return UIImage(named: "clear", in: .module, compatibleWith: nil)!
             case .undo:
-                return UIImage(named: "undo")!
+                return UIImage(named: "undo", in: .module, compatibleWith: nil)!
             case .redo:
-                return UIImage(named: "redo")!
+                return UIImage(named: "redo", in: .module, compatibleWith: nil)!
             }
         }
     }
     weak var toolbarDelegate: WebviewToolbarDelegate? = nil
+    var myBackgroundColor: UIColor? = nil
+    var myTintColor: UIColor? = nil
     var enableAccessoryView = true
     var accessoryView: UIView? = nil
     var modifiers: [Modifier] = [.bold, .italic, .textAlignRight, .textAlignCenter, .textAlignLeft, .indent, .outdent, .clear, .undo, .redo]
@@ -100,14 +102,18 @@ class CustomWebview: WKWebView {
                 layout.scrollDirection = .horizontal
                 
                 let collectionView = UICollectionView(frame: CGRect(x: 0, y: 0, width: 100, height: 50), collectionViewLayout: layout)
-                //collectionView.backgroundColor = theme.background
+                if #available(iOS 13.0, *) {
+                    collectionView.backgroundColor = myBackgroundColor ?? .systemBackground
+                } else {
+                    collectionView.backgroundColor = myBackgroundColor ?? .lightGray
+                }
                 collectionView.dataSource = self
                 collectionView.delegate = self
                 collectionView.isScrollEnabled = true
                 collectionView.bounces = false
                 collectionView.showsHorizontalScrollIndicator = false
                 
-                let accessoryNib = UINib(nibName: "AccessoryUICollectionViewCell", bundle: nil)
+                let accessoryNib = UINib(nibName: "AccessoryUICollectionViewCell", bundle: .module)
                 collectionView.register(accessoryNib, forCellWithReuseIdentifier: "accessoryCell")
                 
                 accessoryView = collectionView
@@ -130,6 +136,11 @@ extension CustomWebview: UICollectionViewDataSource, UICollectionViewDelegate, U
 
         let collectionCell = collectionView.dequeueReusableCell(withReuseIdentifier: "accessoryCell", for: indexPath) as! AccessoryUICollectionViewCell
         collectionCell.iconImageView.image = modifier.image
+        if #available(iOS 13.0, *) {
+            collectionCell.iconImageView.tintColor = myTintColor ?? .systemFill
+        } else {
+            collectionCell.iconImageView.tintColor = myTintColor ?? .darkText
+        }
         return collectionCell
     }
     

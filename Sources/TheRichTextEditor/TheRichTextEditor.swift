@@ -85,9 +85,9 @@ public class TheRichTextEditor: UIView, WKScriptMessageHandler, WKNavigationDele
     }
     
     func setup() {
-        guard let scriptPath = Bundle.main.path(forResource: "main", ofType: "js"),
+        guard let scriptPath = Bundle.module.path(forResource: "main", ofType: "js"),
             let scriptContent = try? String(contentsOfFile: scriptPath, encoding: String.Encoding.utf8),
-            let htmlPath = Bundle.main.path(forResource: "main", ofType: "html"),
+            let htmlPath = Bundle.module.path(forResource: "main", ofType: "html"),
             let html = try? String(contentsOfFile: htmlPath, encoding: String.Encoding.utf8)
             else {
             fatalError("Unable to find javscript/html for text editor")
@@ -131,6 +131,15 @@ public class TheRichTextEditor: UIView, WKScriptMessageHandler, WKNavigationDele
 
         webView.loadHTMLString(html, baseURL: Bundle.main.bundleURL)
     }
+    
+    public func setColors(background: UIColor, icons: UIColor) {
+        guard let customWebview = webView as? CustomWebview else {
+            return
+        }
+        
+        customWebview.myTintColor = icons
+        customWebview.myBackgroundColor = background
+    }
 
     public func userContentController(_ userContentController: WKUserContentController, didReceive message: WKScriptMessage) {
         switch message.name {
@@ -141,7 +150,6 @@ public class TheRichTextEditor: UIView, WKScriptMessageHandler, WKNavigationDele
         case TheRichTextEditor.heightDidChange:
             guard let height = message.body as? CGFloat else { return }
             if (height + 20 != self.height) {
-                print(self.height)
                 self.height = height + 20
                 delegate?.heightDidChange()
             }
