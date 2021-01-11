@@ -1,3 +1,5 @@
 # TheRichTextEditor
 
 A description of this package.
+
+<div>Icons made by <a href="https://www.flaticon.com/authors/bqlqn" title="bqlqn">bqlqn</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a></div>
